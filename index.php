@@ -57,24 +57,37 @@
                               </div>
                                 <?php
                                 //вывод комментариев
-                                $comments = array('name' => user, 'date' => d/m/Y, 'text' => some_text);
-
-                                foreach ($comments as $comment) {
-                                    echo $comment;
-                                }
+                                $comments = [
+                                    [
+                                        'user' => 'Damir',
+                                        'text' => 'Lorem some text',
+                                        'date' => date('d/m/Y')
+                                    ],
+                                    [
+                                        'user' => 'Ruslan',
+                                        'text' => 'Initial code text',
+                                        'date' => date('d/m/Y')
+                                    ],
+                                    [
+                                        'user' => 'Pavel',
+                                        'text' => 'Formula one',
+                                        'date' => date('d/m/Y')
+                                    ],
+                                ];
 
                                 ?>
-
+                                <?php foreach ($comments as $comment) { ?>
                                 <div class="media">
                                   <img src="img/no-user.jpg" class="mr-3" alt="..." width="64" height="64">
                                   <div class="media-body">
-                                    <h5 class="mt-0">John Doe</h5>
-                                    <span><small><?php echo date('d/m/Y', strtotime($user["date"])); ?></small></span>
+                                    <h5 class="mt-0"><?= $comment['user'] ?></h5>
+                                    <span><small><?= $comment['date'] ?></small></span>
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe aspernatur, ullam doloremque deleniti, sequi obcaecati.
+                                        <?= $comment['text'] ?>
                                     </p>
                                   </div>
                                 </div>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
