@@ -76,7 +76,7 @@
                                 ];
 
                                 ?>
-                                <?php foreach ($comments as $comment) { ?>
+                                <?php foreach ($comments as $comment): ?>
                                 <div class="media">
                                   <img src="img/no-user.jpg" class="mr-3" alt="..." width="64" height="64">
                                   <div class="media-body">
@@ -87,7 +87,7 @@
                                     </p>
                                   </div>
                                 </div>
-                                <?php } ?>
+                                <?php endforeach ?>
                             </div>
                         </div>
                     </div>
