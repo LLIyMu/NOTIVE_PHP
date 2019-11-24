@@ -57,24 +57,10 @@
                               </div>
                                 <?php
                                 //вывод комментариев
-                                $comments = [
-                                    [
-                                        'user' => 'Damir',
-                                        'text' => 'Lorem some text',
-                                        'date' => date('d/m/Y')
-                                    ],
-                                    [
-                                        'user' => 'Ruslan',
-                                        'text' => 'Initial code text',
-                                        'date' => date('d/m/Y')
-                                    ],
-                                    [
-                                        'user' => 'Pavel',
-                                        'text' => 'Formula one',
-                                        'date' => date('d/m/Y')
-                                    ],
-                                ];
+                                require('db.php');
 
+                                $comments = $pdo->query('SELECT * FROM `form`')->fetchAll();
+                                
                                 ?>
                                 <?php foreach ($comments as $comment): ?>
                                 <div class="media">
@@ -100,11 +86,11 @@
                                 <form action="store.php" method="post">
                                     <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Имя</label>
-                                    <input name="name" class="form-control" id="exampleFormControlTextarea1" />
+                                    <input name="user" class="form-control" id="exampleFormControlTextarea1" />
                                   </div>
                                   <div class="form-group">
-                                    <label for="exampleFormControlTextarea1">Сообщение</label>
-                                    <textarea name="text" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <label for="exampleFormControlTextarea2">Сообщение</label>
+                                    <textarea name="text" class="form-control" id="exampleFormControlTextarea2" rows="3"></textarea>
                                   </div>
                                   <button type="submit" class="btn btn-success">Отправить</button>
                                 </form>

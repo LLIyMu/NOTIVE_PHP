@@ -1,17 +1,17 @@
 <?php
 
-require ('db.php');
+require('db.php');
 
-if (isset($_POST['name'])) {
+if (isset($_POST['user'])) {
 
-    $date = date("Y,m,d"); //Получаем текущую дату (Год, месяц, день)
+    $date = date("Y-m-d"); //Получаем текущую дату (Год, месяц, день)
     $text = htmlentities(trim($_POST['text'])); //Получаем текст из комментария, избавляемся от пробелов с его концоы, предотвращаем возможность скриптовой атаки
-    $name = htmlentities(trim($_POST['name'])); //Получаю имя пользователя.
-
-    $sql = 'INSERT INTO `form` (id, name, text, date) VALUES (:id, :name, :text, :date)';
-    $values = ['id' => $id, 'name' => $name, 'text' => $text, 'date' => $date];
+    $user = htmlentities(trim($_POST['user'])); //Получаю имя пользователя.
+    
+    $sql = 'INSERT INTO `form` (`user`, `text`, `date`) VALUES (:user, :text, :date)';
+    $values = ['user' => $user, 'text' => $text, 'date' => $date];
     $statement = $pdo->prepare($sql);
     $statement->execute($values);
-
-   
 }
+header("Location: /");
+exit;

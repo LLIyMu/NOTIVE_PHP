@@ -1,5 +1,5 @@
 <?php
-require 'function.php';
+//require 'function.php';
 
 $driver = 'mysql';
 $host = 'localhost';
@@ -17,13 +17,7 @@ $options = [
 
 $pdo = new PDO($dsn, $db_user, $db_password, $options);
 
-$sql = "SELECT * FROM `form` WHERE id =:id";
 
-$statement = $pdo->prepare($sql);
-
-$statement->execute(['id'=>1]);
-
-$result = $statement->fetch();
 
 
 ?>
