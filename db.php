@@ -1,5 +1,6 @@
 <?php
-//require 'function.php';
+session_start();
+
 
 $driver = 'mysql';
 $host = 'localhost';
@@ -16,8 +17,5 @@ $options = [
 ];
 
 $pdo = new PDO($dsn, $db_user, $db_password, $options);
-
-
-
 
 ?>

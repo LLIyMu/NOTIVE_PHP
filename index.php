@@ -1,3 +1,6 @@
+<?php
+require_once('db.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,13 +56,18 @@
 
                             <div class="card-body">
                               <div class="alert alert-success" role="alert">
-                                Комментарий успешно добавлен
+                                <?//Add alert message
+                                if (isset($_SESSION[$alert])) {
+                                        echo $_SESSION[$alert];
+                                        unset($_SESSION[$alert]);
+                                }
+                                ?>
                               </div>
                                 <?php
                                 //вывод комментариев
-                                require('db.php');
+                                require_once('db.php');
 
-                                $comments = $pdo->query('SELECT * FROM `form`')->fetchAll();
+                                $comments = $pdo->query('SELECT * FROM `form` ORDER BY id DESC')->fetchAll();
                                 
                                 ?>
                                 <?php foreach ($comments as $comment): ?>
