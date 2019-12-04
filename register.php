@@ -1,5 +1,9 @@
+<?php
+require_once('db.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,6 +17,7 @@
     <!-- Styles -->
     <link href="css/app.css" rel="stylesheet">
 </head>
+
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
@@ -33,12 +38,12 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="login.php">Login</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="register.php">Register</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.php">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="register.php">Register</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -58,11 +63,13 @@
                                         <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
 
                                         <div class="col-md-6">
-                                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="" autofocus>
+                                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" autofocus required>
 
+                                            <? if (isset($_SESSION['loginErr'])) : ?>
                                                 <span class="invalid-feedback" role="alert">
-                                                    <strong>Ошибка валидации</strong>
+                                                    <strong><?= $_SESSION['loginErr']; ?></strong>
                                                 </span>
+                                            <? endif ?>
                                         </div>
                                     </div>
 
@@ -70,7 +77,13 @@
                                         <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
 
                                         <div class="col-md-6">
-                                            <input id="email" type="email" class="form-control" name="email" >
+                                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" required>
+
+                                            <? if (isset($_SESSION['emailErr']['emaiErr_1'])) : ?>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong><?= $_SESSION['emailErr']['emailErr_1']; ?></strong>
+                                                </span>
+                                            <? endif ?>
                                         </div>
                                     </div>
 
@@ -78,7 +91,13 @@
                                         <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
 
                                         <div class="col-md-6">
-                                            <input id="password" type="password" class="form-control " name="password"  autocomplete="new-password">
+                                            <input id="password" type="password" class="form-control " name="password" autocomplete="new-password" required>
+
+                                            <? if (isset($_SESSION['passErr']['passErr_1']['passErr_2'])) : ?>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong><?= $_SESSION['passErr']['passErr_1']['passErr_2']; ?></strong>
+                                                </span>
+                                            <? endif ?>
                                         </div>
                                     </div>
 
@@ -86,7 +105,13 @@
                                         <label for="password-confirm" class="col-md-4 col-form-label text-md-right">Confirm Password</label>
 
                                         <div class="col-md-6">
-                                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation"  autocomplete="new-password">
+                                            <input id="password-confirm" type="password" class="form-control" name="pass_confirm" autocomplete="new-password" required>
+
+                                            <? if (isset($_SESSION['passErr_1']['passErr_1']['passErr_2'])) : ?>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong><?= $_SESSION['passErr_1']['passErr_1']['passErr_2']; ?></strong>
+                                                </span>
+                                            <? endif ?>
                                         </div>
                                     </div>
 
@@ -106,4 +131,5 @@
         </main>
     </div>
 </body>
+
 </html>
