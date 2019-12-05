@@ -1,6 +1,7 @@
 <?php
 require_once('db.php');
 ?>
+<? var_dump($_SESSION); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,13 +64,18 @@ require_once('db.php');
                                         <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
 
                                         <div class="col-md-6">
-                                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" autofocus required>
+                                            <input id="name" type="text" class="form-control
+                                             <? if (isset($_SESSION['nameErr'])) : ?>is-invalid<? endif; ?>" name="name" autofocus required>
 
-                                            <? if (isset($_SESSION['loginErr'])) : ?>
+                                            <? if (isset($_SESSION['nameErr'])) : ?>
                                                 <span class="invalid-feedback" role="alert">
-                                                    <strong><?= $_SESSION['loginErr']; ?></strong>
+                                                    <strong>
+                                                        <?= $_SESSION['nameErr']; ?>
+                                                    </strong>
                                                 </span>
-                                            <? endif ?>
+                                            <? unset($_SESSION['nameErr']);
+                                            endif;
+                                            ?>
                                         </div>
                                     </div>
 
@@ -77,13 +83,20 @@ require_once('db.php');
                                         <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
 
                                         <div class="col-md-6">
-                                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" required>
+                                            <input id="email" type="email" class="form-control
+                                              <? if (isset($_SESSION['emailErr'])) : ?>is-invalid<? endif; ?>" name="email" required>
 
-                                            <? if (isset($_SESSION['emailErr']['emaiErr_1'])) : ?>
+
+                                            <? if (isset($_SESSION['emailErr'])) : ?>
                                                 <span class="invalid-feedback" role="alert">
-                                                    <strong><?= $_SESSION['emailErr']['emailErr_1']; ?></strong>
+                                                    <strong>
+                                                        <?= $_SESSION['emailErr']; ?>
+                                                    </strong>
                                                 </span>
-                                            <? endif ?>
+                                            <? unset($_SESSION['emailErr']);
+                                            endif;
+                                            ?>
+
                                         </div>
                                     </div>
 
@@ -91,13 +104,18 @@ require_once('db.php');
                                         <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
 
                                         <div class="col-md-6">
-                                            <input id="password" type="password" class="form-control " name="password" autocomplete="new-password" required>
+                                            <input id="password" type="password" class="form-control 
+                                             <? if (isset($_SESSION['passErr'])) : ?>is-invalid<? endif; ?>" name="password" autocomplete="new-password" required>
 
-                                            <? if (isset($_SESSION['passErr']['passErr_1']['passErr_2'])) : ?>
+                                            <? if (isset($_SESSION['passErr'])) : ?>
                                                 <span class="invalid-feedback" role="alert">
-                                                    <strong><?= $_SESSION['passErr']['passErr_1']['passErr_2']; ?></strong>
+                                                    <strong>
+                                                        <?= $_SESSION['passErr']; ?>
+                                                    </strong>
                                                 </span>
-                                            <? endif ?>
+                                            <? unset($_SESSION['passErr']);
+                                            endif;
+                                            ?>
                                         </div>
                                     </div>
 
@@ -105,13 +123,17 @@ require_once('db.php');
                                         <label for="password-confirm" class="col-md-4 col-form-label text-md-right">Confirm Password</label>
 
                                         <div class="col-md-6">
-                                            <input id="password-confirm" type="password" class="form-control" name="pass_confirm" autocomplete="new-password" required>
-
-                                            <? if (isset($_SESSION['passErr_1']['passErr_1']['passErr_2'])) : ?>
+                                            <input id="password-confirm" type="password" class="form-control
+                                             <? if (isset($_SESSION['passErr'])) : ?>is-invalid<? endif; ?>" name="pass_confirm" autocomplete="new-password" required>
+                                            <? if (isset($_SESSION['passErr'])) : ?>
                                                 <span class="invalid-feedback" role="alert">
-                                                    <strong><?= $_SESSION['passErr_1']['passErr_1']['passErr_2']; ?></strong>
+                                                    <strong>
+                                                        <?= $_SESSION['passErr']; ?>
+                                                    </strong>
                                                 </span>
-                                            <? endif ?>
+                                            <? unset($_SESSION['passErr']);
+                                            endif;
+                                            ?>
                                         </div>
                                     </div>
 

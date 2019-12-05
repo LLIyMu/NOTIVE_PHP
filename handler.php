@@ -1,7 +1,7 @@
 <?php
 error_reporting(-1);
-require_once('db.php');
-require('valReg.php');
+require_once 'db.php';
+
 
 
 $name = htmlentities(trim($_POST['name'])); //Имя пользователя
@@ -10,37 +10,44 @@ $password = htmlentities(trim($_POST['password'])); //Получаю парол�
 $passHash = password_hash($password, PASSWORD_DEFAULT); //Хэширую пароль.
 $pass_conf = htmlentities(trim($_POST['pass_confirm']));
 
-if (!empty($name) && !empty($email) && !empty($passHash) && !empty($pass_conf)
-) {
-
+if (!empty($name) && !empty($email) && !empty($passHash) && !empty($pass_conf)) {
+    
     //Запрос к БД на существующий email
     $sql_check = 'SELECT EXISTS( SELECT email FROM users WHERE email = :email )';
     $stmt_check = $pdo->prepare($sql_check);
     $stmt_check->execute([':email' => $email]);
+
     
-    // проверяю ввод email на допустимые символы
-    if (!preg_match('#^([a-z0-9_.-]{1,20}+)@([a-z0-9_.-]+)\.([a-z\.]{2,10})$#', $email)) {
+
+        if(strLen($name) < 5) { // проверка на минимальное количество символов
+        $_SESSION['nameErr'] = 'Не меньше 5 символов';
+        header('location:/register.php');
+        
+        exit;
+    
+    }   // проверяю ввод email на допустимые символы
+        elseif (!preg_match('#^([a-z0-9_.-]{1,20}+)@([a-z0-9_.-]+)\.([a-z\.]{2,10})$#', $email)) {
          
-        $_SESSION['emailErr'] = ' Укажите правильный email ';
-        header('location: /register.php');
+        $_SESSION['emailErr'] = 'Укажите правильный email';
+        header('location:/register.php');
         exit;
-        //проверяю email на уже существующий
-    } elseif ($stmt_check->fetchColumn()) {
-        $_SESSION['emailErr_1'] = 'Такой email уже зарегестрирован ранее';
-        header('location: /register.php');
+        
+    } elseif ($stmt_check->fetchColumn()) { //проверяю email на уже существующий
+        $_SESSION['emailErr'] = 'Такой email уже зарегистрирован ранее';
+        header('location:/register.php');
         exit;
-    } elseif (strLen($password) < 6) {
+    } elseif (strLen($password) < 6) { // проверка на минимальное количество символов
         $_SESSION['passErr'] = 'Пароль меньше 6 символов';
         header('location:/register.php');
         exit;
-    } elseif (strLen($pass_conf) < 6) {
-        $_SESSION['passErr_1'] = 'Пароль меньше 6 символов';
+    } elseif (strLen($pass_conf) < 6) { // проверка на минимальное количество символов
+        $_SESSION['passErr'] = 'Пароль меньше 6 символов';
         header('location:/register.php');
         exit;
-    } elseif ($password !== $pass_conf) {
+    } elseif ($password !== $pass_conf) { //проверяю совпадают ли пароли
         
-        $_SESSION['passErr_2'] = 'Пароли не совпадают';
-        header('location: /register.php');
+        $_SESSION['passErr'] = 'Пароли не совпадают';
+        header('location:/register.php');
         exit;
     } else {
         //Вставляем введенныую пользователем информацию в БД.
@@ -48,12 +55,12 @@ if (!empty($name) && !empty($email) && !empty($passHash) && !empty($pass_conf)
         $values = ['name' => $name, 'email' => $email, 'password' => $passHash];
         $statement = $pdo->prepare($sql);
         $statement->execute($values);
-        header("Location: /login.php");
+        header("Location:/login.php");
         exit;
     }
 } else {
     $_SESSION['loginErr'] = 'Заполните обязательные поля';
-    header('location: /register.php');
+    //header('location:/register.php');
     exit;
 }
 /* 1. Получаем данные из полей
