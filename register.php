@@ -1,7 +1,6 @@
 <?php
 require_once('db.php');
 ?>
-<? var_dump($_SESSION); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,7 +57,7 @@ require_once('db.php');
                             <div class="card-header">Register</div>
 
                             <div class="card-body">
-                                <form method="POST" action="handler.php">
+                                <form method="POST" action="reg_hand.php">
 
                                     <div class="form-group row">
                                         <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
