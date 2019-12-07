@@ -36,6 +36,13 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+
+                        <?php if (isset($_SESSION['user_info'])) : ?>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.php"><?php echo $_SESSION['user_info']['name'] ?></a>
+                        </li>
+                        <?php else : ?>
                         <!-- Authentication Links -->
                         <li class="nav-item">
                             <a class="nav-link" href="login.php">Login</a>
@@ -43,6 +50,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="register.php">Register</a>
                         </li>
+                        <?php endif; ?>
                     </ul>
                 </div>
             </div>

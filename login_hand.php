@@ -10,7 +10,7 @@ if (!empty($email) && !empty($password)) {
     $sql_get = 'SELECT * FROM users WHERE email = :email';
     $stmt_get = $pdo->prepare($sql_get);
     $stmt_get->execute([':email' => $email]);
-    $email_log = $stmt_get->fetch(PDO::FETCH_OBJ);
+    $email_log = $stmt_get->fetch();
     
         //Если переменная $email_log существует
     if ($email_log) {
@@ -27,7 +27,7 @@ if (!empty($email) && !empty($password)) {
            //header('location:/login.php');
            exit;
            // var_dump($_SESSION);
-       } elseif (password_verify($password, $email_log->password)) {
+       } elseif (password_verify($password, $email_log['password'])) {
             //если эмейл и парроль совпадает, подключаем пользователя в сессию.
             if (empty($email)) { //если есть сессия - извлекаем из неё данные email
                 if (isset($_SESSION['user_info'])) { //
@@ -42,7 +42,7 @@ if (!empty($email) && !empty($password)) {
             $sql_get = 'SELECT * FROM users WHERE email = :email';
             $stmt_get = $pdo->prepare($sql_get);
             $stmt_get->execute([':email' => $email]);
-            $_SESSION['user_info'] = $stmt_get->fetch(PDO::FETCH_OBJ);
+            $_SESSION['user_info'] = $stmt_get->fetch();
 
             header('location:/'); //редирект на главную
             exit;

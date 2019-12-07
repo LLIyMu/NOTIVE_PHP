@@ -63,7 +63,7 @@
 
                                         <div class="col-md-6">
                                             <input id="email" type="email" class="form-control
-                                             <? if (isset($_SESSION['emailErr'])) : ?>is-invalid<? endif; ?>" name="email" autocomplete="email" autofocus>
+                                             <? if (isset($_SESSION['emailErr'])) : ?>is-invalid<? endif; ?>" name="email" autocomplete="email" autofocus required>
                                             <?php if (isset($_SESSION['emailErr'])) : ?>
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
@@ -81,7 +81,7 @@
 
                                         <div class="col-md-6">
                                             <input id="password" type="password" class="form-control
-                                             <? if (isset($_SESSION['passErr'])) : ?>is-invalid<? endif; ?>" name="password" autocomplete="current-password">
+                                             <? if (isset($_SESSION['passErr'])) : ?>is-invalid<? endif; ?>" name="password" autocomplete="current-password" required>
                                             <?php if (isset($_SESSION['passErr'])) : ?>
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
