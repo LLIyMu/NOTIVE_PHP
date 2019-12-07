@@ -1,6 +1,8 @@
-<?php require_once 'db.php'; ?>
+<?php require_once('db.php'); ?>
+<? var_dump($_SESSION); ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,6 +16,7 @@
     <!-- Styles -->
     <link href="css/app.css" rel="stylesheet">
 </head>
+
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
@@ -34,12 +37,12 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="login.php">Login</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="register.php">Register</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.php">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="register.php">Register</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -59,10 +62,17 @@
                                         <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
 
                                         <div class="col-md-6">
-                                            <input id="email" type="email" class="form-control is-invalid " name="email"  autocomplete="email" autofocus >
+                                            <input id="email" type="email" class="form-control
+                                             <? if (isset($_SESSION['emailErr'])) : ?>is-invalid<? endif; ?>" name="email" autocomplete="email" autofocus>
+                                            <?php if (isset($_SESSION['emailErr'])) : ?>
                                                 <span class="invalid-feedback" role="alert">
-                                                    <strong>Ошибка валидации</strong>
+                                                    <strong>
+                                                        <?= $_SESSION['emailErr']; ?>
+                                                    </strong>
                                                 </span>
+                                            <?php unset($_SESSION['emailErr']);
+                                            endif;
+                                            ?>
                                         </div>
                                     </div>
 
@@ -70,14 +80,24 @@
                                         <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
 
                                         <div class="col-md-6">
-                                            <input id="password" type="password" class="form-control" name="password"  autocomplete="current-password">
+                                            <input id="password" type="password" class="form-control
+                                             <? if (isset($_SESSION['passErr'])) : ?>is-invalid<? endif; ?>" name="password" autocomplete="current-password">
+                                            <?php if (isset($_SESSION['passErr'])) : ?>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>
+                                                        <?= $_SESSION['passErr']; ?>
+                                                    </strong>
+                                                </span>
+                                            <?php unset($_SESSION['passErr']);
+                                            endif;
+                                            ?>
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <div class="col-md-6 offset-md-4">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="remember" id="remember" >
+                                                <input class="form-check-input" type="checkbox" name="remember" id="remember">
 
                                                 <label class="form-check-label" for="remember">
                                                     Remember Me
@@ -89,7 +109,7 @@
                                     <div class="form-group row mb-0">
                                         <div class="col-md-8 offset-md-4">
                                             <button type="submit" class="btn btn-primary">
-                                               Login
+                                                Login
                                             </button>
                                         </div>
                                     </div>
@@ -102,4 +122,5 @@
         </main>
     </div>
 </body>
+
 </html>
