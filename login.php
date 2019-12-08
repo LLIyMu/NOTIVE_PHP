@@ -1,5 +1,5 @@
 <?php require_once('db.php'); ?>
-<? var_dump($_SESSION); ?>
+<? var_dump($_COOKIE); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -97,7 +97,7 @@
                                     <div class="form-group row">
                                         <div class="col-md-6 offset-md-4">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="remember" id="remember">
+                                                <input class="form-check-input" type="checkbox" name="remember" id="remember" value="1">
 
                                                 <label class="form-check-label" for="remember">
                                                     Remember Me

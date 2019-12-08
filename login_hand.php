@@ -29,9 +29,15 @@ if (!empty($email) && !empty($password)) {
            // var_dump($_SESSION);
        } elseif (password_verify($password, $email_log['password'])) {
             //если эмейл и парроль совпадает, подключаем пользователя в сессию.
-            if (empty($email)) { //если есть сессия - извлекаем из неё данные email
-                if (isset($_SESSION['user_info'])) { //
+            if (empty($email)) { 
+                if (isset($_COOKIE['user_aut'])) { //если есть кука - извлекаю данные из email
+                    $email = $_COOKIE['user_aut'];
+                }
+                if (isset($_SESSION['user_info'])) { //если есть сессия - извлекаем из неё данные email
                     $email = $_SESSION['user_info']->$email;
+                    if(isset($_POST['remember'])){
+                        setcookie('user_aut', $email_log->email, time() + 3600);
+                    }
                 } else{
                     echo 'Ошибка закгрузки данных';
                 }

@@ -1,5 +1,5 @@
 <?php require_once('db.php'); ?>
-
+<? var_dump($_COOKIE); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,17 +39,17 @@
 
                         <?php if (isset($_SESSION['user_info'])) : ?>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="login.php"><?php echo $_SESSION['user_info']['name'] ?></a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="login.php">Привет, <?php echo $_SESSION['user_info']['name'] ?></a>
+                            </li>
                         <?php else : ?>
-                        <!-- Authentication Links -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="login.php">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="register.php">Register</a>
-                        </li>
+                            <!-- Authentication Links -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="login.php">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="register.php">Register</a>
+                            </li>
                         <?php endif; ?>
                     </ul>
                 </div>
