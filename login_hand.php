@@ -30,14 +30,10 @@ if (!empty($email) && !empty($password)) {
        } elseif (password_verify($password, $email_log['password'])) {
             //если эмейл и парроль совпадает, подключаем пользователя в сессию.
             if (empty($email)) { 
-                if (isset($_COOKIE['user_aut'])) { //если есть кука - извлекаю данные из email
-                    $email = $_COOKIE['user_aut'];
-                }
+                
                 if (isset($_SESSION['user_info'])) { //если есть сессия - извлекаем из неё данные email
                     $email = $_SESSION['user_info']->$email;
-                    if(isset($_POST['remember'])){
-                        setcookie('user_aut', $email_log->email, time() + 3600);
-                    }
+                    
                 } else{
                     echo 'Ошибка закгрузки данных';
                 }
@@ -50,6 +46,10 @@ if (!empty($email) && !empty($password)) {
             $stmt_get->execute([':email' => $email]);
             $_SESSION['user_info'] = $stmt_get->fetch();
 
+            if (isset($_POST['remember'])) { //если нажат чек запомнить меня записываю пользователя в КУКУ
+                setcookie('user_aut', $email_log->email, time() + 3600);
+            }
+                
             header('location:/'); //редирект на главную
             exit;
         } else{

@@ -38,10 +38,11 @@
                     <ul class="navbar-nav ml-auto">
 
                         <?php if (isset($_SESSION['user_info'])) : ?>
-
+                            <!-- если есть сессия то выводим вместо меню, имя пользователя -->
                             <li class="nav-item">
                                 <a class="nav-link" href="login.php">Привет, <?php echo $_SESSION['user_info']['name'] ?></a>
                             </li>
+                            <li><a href="logout.php">Выход</a></li>
                         <?php else : ?>
                             <!-- Authentication Links -->
                             <li class="nav-item">
@@ -67,7 +68,7 @@
 
                             <div class="card-body">
                                 <div class="alert alert-success <? if (empty($_SESSION['alert'])) : echo 'd-none' ?><? endif; ?>" role="alert">
-                                    <? //Add alert message
+                                    <? //Добавляю сообщение о добавлении комментария
                                     if (isset($_SESSION['alert'])) {
                                         echo $_SESSION['alert'];
                                         unset($_SESSION['alert']);
@@ -102,21 +103,11 @@
                             <div class="card-header">
                                 <h3>Оставить комментарий</h3>
                             </div>
-
+                        
+                            <?php if(isset($_SESSION['user_info'])) : ?>
                             <div class="card-body">
                                 <form action="store.php" method="post">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlTextarea1">Имя</label>
-                                        <input name="user" class="form-control" id="exampleFormControlTextarea1">
-                                        <div class="alert alert-success <? if (empty($_SESSION['user'])) : echo 'd-none' ?><? endif; ?> " role="alert">
-                                            <? //Add alert message user
-                                            if (isset($_SESSION['user'])) {
-                                                echo $_SESSION['user'];
-                                                unset($_SESSION['user']);
-                                            }
-                                            ?>
-                                        </div>
-                                    </div>
+
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea2">Сообщение</label>
                                         <textarea name="text" class="form-control" id="exampleFormControlTextarea2" rows="3"></textarea>
@@ -132,6 +123,15 @@
                                     <button type="submit" class="btn btn-success">Отправить</button>
                                 </form>
                             </div>
+                            <?php else : ?>
+
+                                <div class="alert alert-success">
+                                    <p>Чтобы оставить комментарий, </p>
+                                    <a href="register.php">зарегистрируйтесь</a>
+                                    <p>или</p>
+                                    <a href="login.php">авторизуйтесь</a> 
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -141,3 +141,15 @@
 </body>
 
 </html>
+                                    <!-- <div class="form-group">
+                                        <label for="exampleFormControlTextarea1">Имя</label>
+                                        <input name="user" class="form-control" id="exampleFormControlTextarea1">
+                                        <div class="alert alert-success <? if (empty($_SESSION['user'])) : echo 'd-none' ?><? endif; ?> " role="alert">
+                                            <? //Add alert message user
+                                            if (isset($_SESSION['user'])) {
+                                                echo $_SESSION['user'];
+                                                unset($_SESSION['user']);
+                                            }
+                                            ?>
+                                        </div>
+                                    </div> -->
