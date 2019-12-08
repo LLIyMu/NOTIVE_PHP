@@ -3,11 +3,13 @@
 
 
 // Если есть КУКА авторизации убиваем её
-if (isset($_COOKIE['user_aut'])) {
-    setcookie('user_aut', '', time() - 3600);
+if (isset($_COOKIE['email'])) {
+    setcookie('email', '', time() - 3600);
+    setcookie('name', '', time() - 3600);
 }
 //убиваем сессию
-unset($_SESSION['user_info']);
+unset($_SESSION['email']);
+unset($_SESSION['user']);
 
 //редирект на главную
 header('location: /');
