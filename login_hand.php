@@ -49,11 +49,13 @@ if ($validate == 1) {
         $_SESSION['success'] = 'Вы успешно авторизованы';
         $_SESSION['email'] = $result_user['email'];
         $_SESSION['name'] = $result_user['name'];
-
+        $_SESSION['user_id'] = $result_user['id'];
+        
         // Если нажат чек-бокс записываю данные в COOKIE
         if (isset($remeber_me)) {
             setcookie('email', $result_user['email'], time() + 3600);
             setcookie('name', $result_user['name'], time() + 3600);
+            setcookie('user_id', $result_user['id'], time() + 3600);
         }
         header('location: /'); // Редирект на главную при условии успешной авторизации
         exit;
@@ -63,14 +65,3 @@ if ($validate == 1) {
 }
 header('location:/login.php'); // редирект при ошибке ввода или введении неверных данных
 exit;
-
-  
-
-   
-        /* if (!$result ) {
-
-            $_SESSION['emailErr'] = 'Укажите правильный email';
-            $validate = 0;
-        } */
-     
-        // проверяю ввод email на допустимые символы

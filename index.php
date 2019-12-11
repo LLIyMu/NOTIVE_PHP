@@ -1,5 +1,11 @@
 <?php require_once('header.php'); ?>
+<?php
+//вывод комментариев
 
+
+$comments = $pdo->query('SELECT form.*, users.name FROM form LEFT JOIN users ON form.user_id = users.id ORDER BY form.id DESC')->fetchAll();
+
+?>
 <main class="py-4">
     <div class="container">
         <div class="row justify-content-center">
@@ -18,18 +24,12 @@
                             }
                             ?>
                         </div>
-                        <?php
-                        //вывод комментариев
-                        require_once('db.php');
 
-                        $comments = $pdo->query('SELECT * FROM `form` ORDER BY id DESC')->fetchAll();
-
-                        ?>
                         <?php foreach ($comments as $comment) : ?>
                             <div class="media">
                                 <img src="img/no-user.jpg" class="mr-3" alt="..." width="64" height="64">
                                 <div class="media-body">
-                                    <h5 class="mt-0"><?= $comment['user'] ?></h5>
+                                    <h5 class="mt-0"><?= $comment['name'] ?></h5>
                                     <span><small><?= date('d/m/Y', strtotime($comment['date'])) ?></small></span>
                                     <p>
                                         <?= $comment['text'] ?>
@@ -53,6 +53,7 @@
                             <form action="store.php" method="post">
 
                                 <div class="form-group">
+                                    <input name="user_id" type="hidden" value="<?= $user_id ?>">
                                     <label for="exampleFormControlTextarea2">Сообщение</label>
                                     <textarea name="text" class="form-control" id="exampleFormControlTextarea2" rows="3"></textarea>
                                     <div class="alert alert-success <? if (empty($_SESSION['text'])) : echo 'd-none' ?><? endif; ?> " role="alert">

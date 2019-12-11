@@ -1,11 +1,13 @@
 <?php require_once('db.php'); ?>
 <?php 
-if (isset($_SESSION['email']) && !isset($_COOKIE['user_email'])) {
+if (isset($_SESSION['email']) && !isset($_COOKIE['email'])) {
     $email = $_SESSION['email'];
     $name = $_SESSION['name'];
+    $user_id = $_SESSION['user_id'];
 } else{
     $email = $_COOKIE['email'];
     $name = $_COOKIE['name'];
+    $user_id = $_COOKIE['user_id'];
 }
 
 ?>
