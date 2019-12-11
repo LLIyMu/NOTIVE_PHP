@@ -2,7 +2,7 @@
 <?php
 //вывод комментариев
 
-
+//Объединяю таблицы для вывода имени аторизованного пользователя, текста и даты комментария  
 $comments = $pdo->query('SELECT form.*, users.name FROM form LEFT JOIN users ON form.user_id = users.id ORDER BY form.id DESC')->fetchAll();
 
 ?>
@@ -15,12 +15,12 @@ $comments = $pdo->query('SELECT form.*, users.name FROM form LEFT JOIN users ON 
                         <h3>Комментарии</h3>
                     </div>
 
-                    <div class="card-body">
+                    <div class="card-body">        <!-- Если сессия пустая добавляю класс d-none для скрытия этого флеш сообщения -->
                         <div class="alert alert-success <? if (empty($_SESSION['alert'])) : echo 'd-none' ?><? endif; ?>" role="alert">
                             <? //Добавляю сообщение о добавлении комментария
-                            if (isset($_SESSION['alert'])) {
-                                echo $_SESSION['alert'];
-                                unset($_SESSION['alert']);
+                            if (isset($_SESSION['alert'])) { //Если сессия существует вывожу сообщение
+                                echo $_SESSION['alert'];     //Вывод сообщения
+                                unset($_SESSION['alert']);   //Закрываю сессию
                             }
                             ?>
                         </div>
@@ -56,7 +56,7 @@ $comments = $pdo->query('SELECT form.*, users.name FROM form LEFT JOIN users ON 
                                     <input name="user_id" type="hidden" value="<?= $user_id ?>">
                                     <label for="exampleFormControlTextarea2">Сообщение</label>
                                     <textarea name="text" class="form-control" id="exampleFormControlTextarea2" rows="3"></textarea>
-                                    <div class="alert alert-success <? if (empty($_SESSION['text'])) : echo 'd-none' ?><? endif; ?> " role="alert">
+                                    <div class="alert alert-danger <? if (empty($_SESSION['text'])) : echo 'd-none' ?><? endif; ?> " role="alert">
                                         <? //Add alert message user
                                             if (isset($_SESSION['text'])) {
                                                 echo $_SESSION['text'];
@@ -71,7 +71,7 @@ $comments = $pdo->query('SELECT form.*, users.name FROM form LEFT JOIN users ON 
                     </div>
                 <?php else : ?>
 
-                    <div class="alert alert-success">
+                    <div class="alert alert-danger">
                         Чтобы оставить комментарий, <a href="register.php">зарегистрируйтесь</a> или <a href="login.php">авторизуйтесь</a>
                     </div>
                 <?php endif; ?>
