@@ -20,7 +20,7 @@
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Новое имя</label>
-                                        <input type="text" class="form-control <? if (isset($_SESSION['nameErr'])) : ?> is-invalid<? endif; ?>" name="name" id="exampleFormControlInput1" value="<?php echo $name ?>" required>
+                                        <input type="text" class="form-control <? if (isset($_SESSION['nameErr'])) : ?> is-invalid<? endif; ?>" name="name" id="exampleFormControlInput1" value="<?php echo $name ?>">
 
                                         <? if (isset($_SESSION['nameErr'])) : ?>
                                             <span class="invalid-feedback" role="alert">
@@ -35,7 +35,7 @@
 
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Изменить Email</label>
-                                        <input type="email" class="form-control <? if (isset($_SESSION['emailErr'])) : ?>is-invalid<? endif; ?>" name="email" value="<?php echo $email ?>" required>
+                                        <input type="email" class="form-control <? if (isset($_SESSION['emailErr'])) : ?>is-invalid<? endif; ?>" name="email" value="<?php echo $email ?>">
 
 
                                         <? if (isset($_SESSION['emailErr'])) : ?>
