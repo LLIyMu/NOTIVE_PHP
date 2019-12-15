@@ -49,8 +49,8 @@ if ($validate == 1) {  //Валидация true
         $_SESSION['success'] = 'Вы успешно авторизованы';
         $_SESSION['email'] = $result_user['email'];//Записываю в сессию полученный email из функции check_user
         $_SESSION['name'] = $result_user['name'];//Записываю в сессию полученное ИМЯ из функции check_user
-        $_SESSION['user_id'] = $result_user['id'];//Записываю в сессию полученный ID из функции check_user
-        
+        $_SESSION['user_id'] = $result_user['id']; //Записываю в сессию полученный ID из функции check_user
+        $_SESSION['user_img'] = $result_user['image'];//Записываю в сессию полученное название image из функции check_use
         // Если нажат чек-бокс записываю данные в COOKIE
         if (isset($remeber_me)) {
             setcookie('email', $result_user['email'], time() + 3600);//Записываю в куки email если нажата кнопка запомнить меня

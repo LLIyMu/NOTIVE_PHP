@@ -18,6 +18,7 @@ function check_user($pdo, $email)
     return $result;                           // возвращаю результат
 }
 
+
 if (isset($name) && ($name != $_SESSION['name'])) {//Если имя в $_POST существует И  ИМЯ из $_POST не равно 
                                                    //ИМЕНИ из сессии
 
@@ -26,28 +27,38 @@ if (isset($name) && ($name != $_SESSION['name'])) {//Если имя в $_POST �
     $stmt->execute([':name' => $name, ':id' => $id]);     //получаю новое имя 
 }
 
+
 if (!empty($email) && ($email != $_SESSION['email'])) {//если поле email не пустое И емайл НЕ равен эмайлу из сессии
     
     $result_email = check_user($pdo, $email);
     
+   
+
+    if (!preg_match('#^([a-z0-9_.-]{1,20}+)@([a-z0-9_.-]+)\.([a-z\.]{2,10})$#', $email)) {
+
+        $_SESSION['emailErr'] = 'Неправильный формат email';
+        $validate = 0;
+    } elseif ($result_email) {
+
+        $_SESSION['emailErr'] = 'Такой email уже зарегестрирован';
+        $validate = 0;
+    }
 }
 
-if ($result_email['email'] == $email) {
-    
-    $_SESSION['emailErr'] = 'Такой email уже зарегестрирован';
-    $validate = 0;
-    dd($result_email['email']);
-}
-if (!preg_match('#^([a-z0-9_.-]{1,20}+)@([a-z0-9_.-]+)\.([a-z\.]{2,10})$#', $email)) {
-    
-    $_SESSION['emailErr'] = 'Неправильный формат email';
-    $validate = 0;
-}
+
+
  
 if($validate == 1) {
     $sql = 'UPDATE users SET email = :email WHERE id = :id'; //подготавливаю запрос к БД и меняю email
     $stmt = $pdo->prepare($sql);                             //подготавливаю запрос (защита от sql-инъекций)
     $stmt->execute([':email' => $email, ':id' => $id]);      //получаю новый email
+
+
+    $_SESSION['email'] = $result_user['email'];
+    $_SESSION['success'] = 'Профиль успешно изменен';
+
+    header('location: /profile.php');
+    exit;
 }
 
 

@@ -9,6 +9,7 @@ $email = htmlentities(trim($_POST['email'])); //Получаем email, изба
 $password = htmlentities(trim($_POST['password'])); //Получаю пароль.
 $passHash = password_hash($password, PASSWORD_DEFAULT); //Хэширую пароль.
 $pass_conf = htmlentities(trim($_POST['pass_confirm']));
+$image = '';
 
 if (!empty($name) && !empty($email) && !empty($passHash) && !empty($pass_conf)) {
     
@@ -51,8 +52,8 @@ if (!empty($name) && !empty($email) && !empty($passHash) && !empty($pass_conf)) 
         exit;
     } else {
         //Вставляем введенныую пользователем информацию в БД.
-        $sql = 'INSERT INTO `users` (`name`, `email`, `password`) VALUES (:name, :email, :password)';
-        $values = ['name' => $name, 'email' => $email, 'password' => $passHash];
+        $sql = 'INSERT INTO `users` (`name`, `email`, `password`, `image`) VALUES (:name, :email, :password, :image)';
+        $values = ['name' => $name, 'email' => $email, 'password' => $passHash, 'image' => $image];
         $statement = $pdo->prepare($sql);
         $statement->execute($values);
         header("Location:/login.php");
@@ -60,7 +61,6 @@ if (!empty($name) && !empty($email) && !empty($passHash) && !empty($pass_conf)) 
     }
 } else {
     $_SESSION['loginErr'] = 'Заполните обязательные поля';
-    //header('location:/register.php');
     exit;
 }
 /* 1. Получаем данные из полей

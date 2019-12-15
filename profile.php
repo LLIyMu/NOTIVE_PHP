@@ -11,9 +11,13 @@
                     </div>
 
                     <div class="card-body">
+                        <?php if(isset($_SESSION['success'])): ?>
                         <div class="alert alert-success" role="alert">
-                            Профиль успешно обновлен
+                            <?= $_SESSION['success']; ?>
                         </div>
+                        <? unset($_SESSION['success']);
+                        endif;
+                        ?>
 
                         <form action="profile_hand.php" method="post" enctype="multipart/form-data">
                             <div class="row">
@@ -35,7 +39,7 @@
 
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Изменить Email</label>
-                                        <input type="email" class="form-control <? if (isset($_SESSION['emailErr'])) : ?>is-invalid<? endif; ?>" name="email" value="<?php echo $email ?>">
+                                        <input type="text" class="form-control <? if (isset($_SESSION['emailErr'])) : ?>is-invalid<? endif; ?>" name="email" value="<?php echo $email ?>">
 
 
                                         <? if (isset($_SESSION['emailErr'])) : ?>
