@@ -1,5 +1,5 @@
-<?php require_once('header.php') ?>
-
+<?php require_once('header.php'); ?>
+<?php require_once('function.php'); ?>
 
 <main class="py-4">
     <div class="container">
@@ -24,7 +24,7 @@
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Новое имя</label>
-                                        <input type="text" class="form-control <? if (isset($_SESSION['nameErr'])) : ?> is-invalid<? endif; ?>" name="name" id="exampleFormControlInput1" value="<?php echo $name ?>">
+                                        <input type="text" class="form-control <? if (isset($_SESSION['nameErr'])) : ?> is-invalid<? endif; ?>" name="name" id="exampleFormControlInput1" value="<?php echo $_SESSION['name']?>">
 
                                         <? if (isset($_SESSION['nameErr'])) : ?>
                                             <span class="invalid-feedback" role="alert">
@@ -39,7 +39,7 @@
 
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Изменить Email</label>
-                                        <input type="text" class="form-control <? if (isset($_SESSION['emailErr'])) : ?>is-invalid<? endif; ?>" name="email" value="<?php echo $email ?>">
+                                        <input type="text" class="form-control <? if (isset($_SESSION['emailErr'])) : ?>is-invalid<? endif; ?>" name="email" value="<?php echo $_SESSION['email']; ?>">
 
 
                                         <? if (isset($_SESSION['emailErr'])) : ?>
