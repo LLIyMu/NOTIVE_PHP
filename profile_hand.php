@@ -20,6 +20,18 @@ function check_user($pdo, $email)           // функция проверки �
     return $result;                           // возвращаю результат
 }
 
+function upoadImage($image)
+{
+
+    $extention = pathinfo($image['name'], PATHINFO_EXTENSION);
+    $filename = uniqid() . "." . $extention;
+
+    move_uploaded_file($image['tmp_name'], 'img/' . $filename);
+
+    return $filename;
+}
+
+
 if (empty($name) || isset($_SESSION['name'])) { //если поле пустое ИЛИ есть сессия с именем пользователя
     
     $data['name'] = $_SESSION['name']; // записываю в переменную имя из сессии
@@ -54,6 +66,11 @@ $result_email = check_user($pdo, $email); // передаю параметры �
     $validate = 0; // валидация не пройдена (false)
 }
 
+if (isset($image)) {
+    $filename = upoadImage($_FILES['image']);
+    $data['image'] = $filename;
+    //dd($filename);
+}
 if($validate == 1) { //если валидация пройдена (true)
 
     $set = ''; // Присваиваю переменной пустую строку
@@ -79,15 +96,3 @@ if($validate == 1) { //если валидация пройдена (true)
 }
 header('location: /profile.php'); // редирект 
 exit;
-
-function upoadImage($image){
-
-    $extention = pathinfo($image['name'], PATHINFO_EXTENSION);
-    $filename = uniqid() . "." . $extention;
-
-    move_uploaded_file($image['tmp_name'], 'img/' . uniqid() . $extention);
-
-    return $filename;
-}
-
-$filename = upoadImage($_FILES['image']);

@@ -59,7 +59,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <img src="img/no-user.jpg" alt="" class="img-fluid">
+                                    <img src="img/<? $_FILES['image'] ?>" alt="" class="img-fluid">
                                 </div>
 
                                 <div class="col-md-12">
