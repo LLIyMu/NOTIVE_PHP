@@ -1,7 +1,7 @@
 <?php
 error_reporting(-1);
 require_once 'db.php';
-
+require_once 'function.php';
 
 
 $name = htmlentities(trim($_POST['name'])); //Имя пользователя
@@ -9,7 +9,6 @@ $email = htmlentities(trim($_POST['email'])); //Получаем email, изба
 $password = htmlentities(trim($_POST['password'])); //Получаю пароль.
 $passHash = password_hash($password, PASSWORD_DEFAULT); //Хэширую пароль.
 $pass_conf = htmlentities(trim($_POST['pass_confirm']));
-$image = '';
 
 if (!empty($name) && !empty($email) && !empty($passHash) && !empty($pass_conf)) {
     

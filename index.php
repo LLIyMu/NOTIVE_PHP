@@ -27,7 +27,7 @@ $comments = $pdo->query('SELECT form.*, users.name FROM form LEFT JOIN users ON 
 
                         <?php foreach ($comments as $comment) : ?>
                             <div class="media">
-                                <img src="img/no-user.jpg" class="mr-3" alt="..." width="64" height="64">
+                                <img src="img/<?php echo $image_user ?>" class="mr-3" alt="..." width="64" height="64">
                                 <div class="media-body">
                                     <h5 class="mt-0"><?= $comment['name'] ?></h5>
                                     <span><small><?= date('d/m/Y', strtotime($comment['date'])) ?></small></span>
@@ -62,7 +62,7 @@ $comments = $pdo->query('SELECT form.*, users.name FROM form LEFT JOIN users ON 
                                                 echo $_SESSION['text'];
                                                 unset($_SESSION['text']);
                                             }
-                                            ?>
+                                        ?>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-success">Отправить</button>
@@ -84,15 +84,3 @@ $comments = $pdo->query('SELECT form.*, users.name FROM form LEFT JOIN users ON 
 </body>
 
 </html>
-<!-- <div class="form-group">
-                                        <label for="exampleFormControlTextarea1">Имя</label>
-                                        <input name="user" class="form-control" id="exampleFormControlTextarea1">
-                                        <div class="alert alert-success <? if (empty($_SESSION['user'])) : echo 'd-none' ?><? endif; ?> " role="alert">
-                                            <? //Add alert message user
-                                            if (isset($_SESSION['user'])) {
-                                                echo $_SESSION['user'];
-                                                unset($_SESSION['user']);
-                                            }
-                                            ?>
-                                        </div>
-                                    </div> -->

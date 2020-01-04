@@ -56,6 +56,8 @@ if ($validate == 1) {  //Валидация true
             setcookie('email', $result_user['email'], time() + 3600);//Записываю в куки email если нажата кнопка запомнить меня
             setcookie('name', $result_user['name'], time() + 3600);//Записываю в куки ИМЯ если нажата кнопка запомнить меня
             setcookie('user_id', $result_user['id'], time() + 3600);//Записываю в куки ID если нажата кнопка запомнить меня
+            setcookie('user_img', $result_user['image'], time() + 3600);//Записываю в куки ID если нажата кнопка запомнить меня
+            
         }
         header('location: /'); // Редирект на главную при условии успешной авторизации
         exit;

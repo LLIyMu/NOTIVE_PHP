@@ -1,14 +1,20 @@
-<?php require_once('db.php'); ?>
+<?php 
+    require_once 'db.php';
+    require_once 'function.php';
+?>
 <?php
-//Если существует сессия с пользователем и не существует куки
-if (isset($_SESSION['email']) && !isset($_COOKIE['email'])) {
+    
+//Если  не существует куки записываем в сессию данные
+if (!isset($_COOKIE['email'])) {
     $email = $_SESSION['email'];     //Записываю в переменную почту из сессии
     $name = $_SESSION['name'];       //Записываю в переменную имя из сессии
     $user_id = $_SESSION['user_id']; //Записываю в переменную ID из сессии
+    $image_user = $_SESSION['user_img'];//Записываю в переменную имя и расширение картинки полученное из БД
 } else { // Иначе записываю в куки
     $email = $_COOKIE['email'];
     $name = $_COOKIE['name'];
     $user_id = $_COOKIE['user_id'];
+    $image_user = $_COOKIE['user_img'];
 }
 
 ?>

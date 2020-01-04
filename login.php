@@ -1,4 +1,5 @@
 <?php require_once('header.php'); ?>
+<?php require_once 'function.php' ?>
         <main class="py-4">
             <div class="container">
                 <div class="row justify-content-center">
@@ -74,5 +75,5 @@
         </main>
     </div>
 </body>
-
+<? dd($_SESSION); ?>
 </html>

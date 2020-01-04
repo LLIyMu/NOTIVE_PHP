@@ -1,6 +1,8 @@
+<?php error_reporting(-1); ?>
 <?php require_once('header.php'); ?>
-<?php require_once('function.php'); ?>
+<?php //require_once('function.php'); ?>
 
+<?php  ?>
 <main class="py-4">
     <div class="container">
         <div class="row justify-content-center">
@@ -59,7 +61,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <img src="img/<? $_FILES['image'] ?>" alt="" class="img-fluid">
+                                    <img src="img/<?php echo $image_user; //$_SESSION['user_img']; ?>" alt="" class="img-fluid">
                                 </div>
 
                                 <div class="col-md-12">
@@ -78,16 +80,19 @@
                     </div>
 
                     <div class="card-body">
+                    <?php if(isset($_SESSION['pass_succes'])): ?>
                         <div class="alert alert-success" role="alert">
-                            Пароль успешно обновлен
+                            <?= $_SESSION['pass_succes']; ?>
                         </div>
+                    <?php unset($_SESSION['pass_succes']);
+                     endif;  ?>
 
-                        <form action="/profile/password" method="post">
+                        <form action="profile_hand_password.php" method="post">
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Current password</label>
-                                        <input type="password" name="current" class="form-control" id="exampleFormControlInput1">
+                                        <input type="password" name="pass_cur" class="form-control" id="exampleFormControlInput1">
                                     </div>
 
                                     <div class="form-group">
@@ -97,7 +102,7 @@
 
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Password confirmation</label>
-                                        <input type="password" name="password_confirmation" class="form-control" id="exampleFormControlInput1">
+                                        <input type="password" name="pass_conf" class="form-control" id="exampleFormControlInput1">
                                     </div>
 
                                     <button class="btn btn-success">Submit</button>
@@ -112,5 +117,5 @@
 </main>
 </div>
 </body>
-
+<?php unset($_SESSION['errImg']); ?>
 </html>
