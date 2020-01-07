@@ -50,10 +50,10 @@ if (!empty($pass_cur) && !empty($password) && !empty($pass_conf)) {
     //Вставляем введенныую пользователем информацию в БД.
         $sql = 'UPDATE users SET password = :password WHERE id = :id'; //Подготавливаю SQL запрос с нужными колонками таблицы
         $values = [':password' => $passHash, ':id' => $user_id];       //Передаю полученные значения
-        $stmt = $pdo->prepare($sql);                                    //Подготовленный запрос
-        $stmt->execute($values);                                         //Получаю обновлённые значения
+        $stmt = $pdo->prepare($sql);                                   //Подготовленный запрос
+        $stmt->execute($values);                                       //Получаю обновлённые значения
 
         $_SESSION['pass_succes'] = 'Пароль обновлён'; // Сообщение об успешном изменении пароля
-        header("Location:/profile.php");                // Редирект обратно на профиль
+        header("Location:/profile.php");              // Редирект обратно на профиль
         exit;
 }

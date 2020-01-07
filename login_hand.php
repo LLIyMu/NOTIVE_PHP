@@ -46,17 +46,21 @@ if ($validate == 1) {  //Валидация true
 
     //Если пользователь существует и введен верный пароль - записываю пользователя в сессию
     if ($result_user && $result_pass) {
-        $_SESSION['success'] = 'Вы успешно авторизованы';
+        $_SESSION['success'] = 'Вы успешно авторизованы';//Сообщение об успешной авторизации
         $_SESSION['email'] = $result_user['email'];//Записываю в сессию полученный email из функции check_user
         $_SESSION['name'] = $result_user['name'];//Записываю в сессию полученное ИМЯ из функции check_user
         $_SESSION['user_id'] = $result_user['id']; //Записываю в сессию полученный ID из функции check_user
         $_SESSION['user_img'] = $result_user['image'];//Записываю в сессию полученное название image из функции check_use
+        $_SESSION['role'] = $result_user['role'];//Записываю в сессию ROLE (админ или обычный пользователь)
+        
         // Если нажат чек-бокс записываю данные в COOKIE
         if (isset($remeber_me)) {
             setcookie('email', $result_user['email'], time() + 3600);//Записываю в куки email если нажата кнопка запомнить меня
             setcookie('name', $result_user['name'], time() + 3600);//Записываю в куки ИМЯ если нажата кнопка запомнить меня
             setcookie('user_id', $result_user['id'], time() + 3600);//Записываю в куки ID если нажата кнопка запомнить меня
             setcookie('user_img', $result_user['image'], time() + 3600);//Записываю в куки ID если нажата кнопка запомнить меня
+            setcookie('role', $result_user['role'], time() + 3600);//Записываю в куки ROLE(админ или обычныц пользователь)
+                                                                    // если нажата кнопка запомнить меня
             
         }
         header('location: /'); // Редирект на главную при условии успешной авторизации

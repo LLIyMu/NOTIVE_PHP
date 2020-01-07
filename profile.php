@@ -1,6 +1,6 @@
 <?php error_reporting(-1); ?>
 <?php require_once('header.php'); ?>
-<?php //require_once('function.php'); ?>
+
 
 <?php  ?>
 <main class="py-4">

@@ -75,5 +75,4 @@
         </main>
     </div>
 </body>
-<? dd($_SESSION); ?>
 </html>

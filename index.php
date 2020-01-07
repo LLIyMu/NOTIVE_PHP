@@ -3,7 +3,7 @@
 //вывод комментариев
 
 //Объединяю таблицы для вывода имени аторизованного пользователя, текста и даты комментария  
-$comments = $pdo->query('SELECT form.*, users.name FROM form LEFT JOIN users ON form.user_id = users.id ORDER BY form.id DESC')->fetchAll();
+$comments = $pdo->query('SELECT form.*, users.name, users.image FROM form LEFT JOIN users ON form.user_id = users.id ORDER BY form.id DESC')->fetchAll();
 
 ?>
 <main class="py-4">
@@ -25,9 +25,9 @@ $comments = $pdo->query('SELECT form.*, users.name FROM form LEFT JOIN users ON 
                             ?>
                         </div>
 
-                        <?php foreach ($comments as $comment) : ?>
+                        <?php foreach ($comments as $comment) :  if ($comment['skip'] !== 1): ?>
                             <div class="media">
-                                <img src="img/<?php echo $image_user ?>" class="mr-3" alt="..." width="64" height="64">
+                                <img src="img/<?= $comment['image'] ?>" class="mr-3" alt="..." width="64" height="64">
                                 <div class="media-body">
                                     <h5 class="mt-0"><?= $comment['name'] ?></h5>
                                     <span><small><?= date('d/m/Y', strtotime($comment['date'])) ?></small></span>
@@ -36,7 +36,9 @@ $comments = $pdo->query('SELECT form.*, users.name FROM form LEFT JOIN users ON 
                                     </p>
                                 </div>
                             </div>
-                        <?php endforeach ?>
+                            <?php endif;  endforeach; ?>
+                            
+                            
                     </div>
                 </div>
             </div>
@@ -82,5 +84,5 @@ $comments = $pdo->query('SELECT form.*, users.name FROM form LEFT JOIN users ON 
 </main>
 </div>
 </body>
-
+<? dd($_SESSION['role']); ?>
 </html>
